@@ -102,7 +102,7 @@ def get_data(input_path):
 
 
     print('Parsing annotation files')
-
+    annots = []
     for data_path in data_paths:
 
         annot_path = os.path.join(data_path, 'Annotations/mat')
@@ -122,14 +122,16 @@ def get_data(input_path):
         except Exception as e:
             print(e)
 
-
-        annots = [os.path.join(annot_path, s) for s in os.listdir(annot_path)]
+        for s in os.listdir(annot_path):
+            if s[0] == '.':
+                continue
+            annots.append(os.path.join(annot_path,s))
+        # annots = [os.path.join(annot_path, s) for s in os.listdir(annot_path)]
 
         for annot in annots:
             print annot
             print '+++'
-            if annot[0]=='.':
-                continue
+
             id = annot.split('/')[-1]
             mat_list = os.listdir(annot)
             for i in range(len(mat_list)):
