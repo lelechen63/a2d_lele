@@ -126,6 +126,8 @@ def get_data(input_path):
         annots = [os.path.join(annot_path, s) for s in os.listdir(annot_path)]
 
         for annot in annots:
+            print annot
+            print '+++'
             id = annot.split('/')[-1]
             mat_list = os.listdir(annot)
             for i in range(len(mat_list)):
