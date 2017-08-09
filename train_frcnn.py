@@ -16,7 +16,7 @@ from keras_frcnn import resnet as nn
 import keras_frcnn.roi_helpers as roi_helpers
 
 
-weight_path = '/home/yue/PycharmProjects/keras-frcnn-yue/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'
+weight_path = '/home/lchen63/project/a2d_lele/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'
 class Options:
     def __init__(self, train_path, parser, num_rois=32, horizontal_flips=True, vertical_flips=True,
                  rot_90=False, num_epochs=15, config_filename='config.pickle', output_weight_path='model_frcnn.hdf5',
@@ -35,7 +35,7 @@ class Options:
 
 sys.setrecursionlimit(40000)
 
-options = Options(train_path='/media/yue/Seagate/A2D', parser='a2d', num_rois=32, num_epochs=15)
+options = Options(train_path='/mnt/disk1/dat/a2d_lele', parser='a2d', num_rois=32, num_epochs=15)
 
 if not options.train_path:   # if filename is not given
     print 'Error: path to training data must be specified. Pass --path to command line'
