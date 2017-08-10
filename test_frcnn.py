@@ -13,23 +13,29 @@ from keras.layers import Input
 from keras.models import Model
 from keras_frcnn import roi_helpers
 import cv2
+import argparse
 sys.setrecursionlimit(40000)
 
-# parser = OptionParser()
-#
-# parser.add_option("-p", "--path", dest="test_path", help="Path to test data.")
-# parser.add_option("-n", "--num_rois", dest="num_rois",
-#                 help="Number of ROIs per iteration. Higher means more memory use.", default=32)
-# parser.add_option("--config_filename", dest="config_filename", help=
-#                 "Location to read the metadata related to the training (generated when training).",
-#                 default="config.pickle")
-#
-# (options, args) = parser.parse_args()
-#
-# if not options.test_path:   # if filename is not given
-#     parser.error('Error: path to test data must be specified. Pass --path to command line')
-#
-weight_path = 'model_frcnn.hdf5'
+def parse_arguments():
+    """Parse arguments from command line"""
+    description = "Train a model."
+    parser = argparse.ArgumentParser(
+        description=description,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+        )
+    parser.add_argument('--weight_path', '-w',
+        default="model_frcnn.hdf5",
+        help = 'The pretrained model'
+        )
+
+    parser.add_argument('--test_path', '-t',
+                default="/mnt/disk1/dat/a2d_lele/id_test_expand.txt",
+                help = 'the data path'
+                )
+    return parser.parse_args()
+args = parse_arguments()
+weight_path = args.weight_path
+test_path = args.test_path
 class Options:
     def __init__(self, test_path, num_rois=32, config_filename='config.pickle'):
         self.test_path = test_path
@@ -39,7 +45,7 @@ class Options:
 
 sys.setrecursionlimit(40000)
 
-options = Options(test_path='/media/yue/Seagate/A2D/id_test_expand.txt', num_rois=32)
+options = Options(test_path, num_rois=32)
 
 
 config_output_filename = options.config_filename
@@ -138,7 +144,7 @@ bbox_threshold = 0.8
 visualise = True
 
 img_paths = []
-prefix = '/media/yue/Seagate/A2D/labeled_frame_images/'
+prefix = '/media/lele/DATA/a2d_lele/labeled_frame_images/'
 with open(img_path) as f:
     for line in f:
         img_paths.append(prefix + line[:-1] + '.png')
@@ -256,5 +262,5 @@ for img_name in img_paths:
     # cv2.imshow('img', img_scaled)
     # cv2.waitKey(0)
     #cv2.imwrite('./imgs/{}.png'.format(idx),img_scaled)
-    img_scaled.save('/media/yue/Seagate/A2D/Faster-RCNN Output/' + img_name, 'PNG')
+    img_scaled.save('/media/lele/DATA/a2d_lele/output/' + img_name, 'PNG')
     print(all_dets)

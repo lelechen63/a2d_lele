@@ -15,8 +15,28 @@ from keras_frcnn import losses as losses
 from keras_frcnn import resnet as nn
 import keras_frcnn.roi_helpers as roi_helpers
 
+# weight_path = '/home/lchen63/project/a2d_lele/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'
 
-weight_path = '/home/lchen63/project/a2d_lele/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'
+def parse_arguments():
+    """Parse arguments from command line"""
+    description = "Train a model."
+    parser = argparse.ArgumentParser(
+        description=description,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+        )
+    parser.add_argument('--weight_path', '-w',
+        default="/home/lchen63/project/a2d_lele/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5",
+        help = 'The pretrained resnet model'
+        )
+
+    parser.add_argument('--train_path', '-t',
+                default="/mnt/disk1/dat/a2d_lele/",
+                help = 'the data path'
+                )
+    return parser.parse_args()
+args = parse_arguments()
+
+
 class Options:
     def __init__(self, train_path, parser, num_rois=32, horizontal_flips=True, vertical_flips=True,
                  rot_90=False, num_epochs=15, config_filename='config.pickle', output_weight_path='model_frcnn.hdf5',
@@ -34,8 +54,9 @@ class Options:
 
 
 sys.setrecursionlimit(40000)
-
-options = Options(train_path='/mnt/disk1/dat/a2d_lele', parser='a2d', num_rois=32, num_epochs=15)
+train_path =args.train_path
+weight_path = args.weight_path
+options = Options(train_path, parser='a2d', num_rois=32, num_epochs=15)
 
 if not options.train_path:   # if filename is not given
     print 'Error: path to training data must be specified. Pass --path to command line'
