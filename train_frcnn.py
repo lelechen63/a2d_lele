@@ -35,7 +35,8 @@ def parse_arguments():
                 )
     return parser.parse_args()
 args = parse_arguments()
-
+train_path =args.train_path
+weight_path = args.weight_path
 
 class Options:
     def __init__(self, train_path, parser, num_rois=32, horizontal_flips=True, vertical_flips=True,
@@ -54,8 +55,7 @@ class Options:
 
 
 sys.setrecursionlimit(40000)
-train_path =args.train_path
-weight_path = args.weight_path
+
 options = Options(train_path, parser='a2d', num_rois=32, num_epochs=15)
 
 if not options.train_path:   # if filename is not given
