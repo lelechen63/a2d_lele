@@ -155,7 +155,7 @@ model_rpn.compile(optimizer=optimizer_rpn, loss=[losses.rpn_loss_cls(num_anchors
 model_classifier.compile(optimizer=optimizer_classifier,
                          loss=[losses.class_loss_cls, losses.class_loss_regr(len(classes_count)-1)],
                          smetrics={'dense_class_{}'.format(len(classes_count)): 'accuracy'})
-model_all.compile(optimizer='sgd', loss='mae')
+model_all.compile(optimizer='sgd', loss='mse')
 model_path = '/mnt/disk1/dat/a2d_lele/model_frcnn.hdf5'
 model_all.load_weights(model_path)
 
