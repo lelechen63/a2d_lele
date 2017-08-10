@@ -25,7 +25,7 @@ def parse_arguments():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
         )
     parser.add_argument('--weight_path', '-w',
-        default="/home/lchen63/project/a2d_lele/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5",
+        default="/mnt/disk1/dat/a2d_lele/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5",
         help = 'The pretrained resnet model'
         )
 
