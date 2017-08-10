@@ -156,8 +156,8 @@ model_classifier.compile(optimizer=optimizer_classifier,
                          loss=[losses.class_loss_cls, losses.class_loss_regr(len(classes_count)-1)],
                          smetrics={'dense_class_{}'.format(len(classes_count)): 'accuracy'})
 model_all.compile(optimizer='sgd', loss='mae')
-print C.model_path
-model_all.load_weights(C.model_path)
+model_path = '/mnt/disk1/dat/a2d_lele/model_frcnn.hdf5'
+model_all.load_weights(model_path)
 
 epoch_length = len(train_imgs)
 num_epochs = int(options.num_epochs)
@@ -280,7 +280,7 @@ while True:
             if C.verbose:
                 print('Total loss decreased from {} to {}, saving weights'.format(best_loss,curr_loss))
             best_loss = curr_loss
-            model_all.save_weights(C.model_path)
+            model_all.save_weights(model_path)
     if epoch_num == num_epochs:
         print('Training complete, exiting.')
         sys.exit()
