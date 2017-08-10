@@ -156,6 +156,7 @@ model_classifier.compile(optimizer=optimizer_classifier,
                          loss=[losses.class_loss_cls, losses.class_loss_regr(len(classes_count)-1)],
                          smetrics={'dense_class_{}'.format(len(classes_count)): 'accuracy'})
 model_all.compile(optimizer='sgd', loss='mae')
+print C.model_path
 model_all.load_weights(C.model_path)
 
 epoch_length = len(train_imgs)
