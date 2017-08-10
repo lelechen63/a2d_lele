@@ -149,14 +149,14 @@ except:
         'https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'
     ))
 
-optimizer_rpn = Adam(lr=1e-5)
-optimizer_classifier = Adam(lr=1e-5)
+optimizer_rpn = Adam(lr=1e-4)
+optimizer_classifier = Adam(lr=1e-4)
 model_rpn.compile(optimizer=optimizer_rpn, loss=[losses.rpn_loss_cls(num_anchors), losses.rpn_loss_regr(num_anchors)])
 model_classifier.compile(optimizer=optimizer_classifier,
                          loss=[losses.class_loss_cls, losses.class_loss_regr(len(classes_count)-1)],
-                         metrics={'dense_class_{}'.format(len(classes_count)): 'accuracy'})
-model_all.compile(optimizer='sgd', loss='mse')
-# model_all.load_weights(C.model_path)
+                         smetrics={'dense_class_{}'.format(len(classes_count)): 'accuracy'})
+model_all.compile(optimizer='sgd', loss='mae')
+model_all.load_weights(C.model_path)
 
 epoch_length = len(train_imgs)
 num_epochs = int(options.num_epochs)
