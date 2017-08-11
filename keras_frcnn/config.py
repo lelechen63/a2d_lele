@@ -14,7 +14,8 @@ class Config:
 
         # anchor box scales
         # self.anchor_box_scales = [64, 128, 256]
-        self.anchor_box_scales = [8, 16, 32]
+        # self.anchor_box_scales = [8, 16, 32]
+        self.anchor_box_scales = [64, 128, 256, 512]
         # anchor box ratios
         self.anchor_box_ratios = [[1, 1], [1, 2], [2, 1]]
 

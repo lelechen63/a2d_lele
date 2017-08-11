@@ -56,7 +56,10 @@ class Options:
 
 sys.setrecursionlimit(40000)
 
-options = Options(train_path, parser='a2d', num_rois=32, num_epochs=15)
+options = Options(train_path, parser='a2d', 
+
+
+    =32, num_epochs=100)
 
 if not options.train_path:   # if filename is not given
     print 'Error: path to training data must be specified. Pass --path to command line'
@@ -249,7 +252,8 @@ while True:
     losses[iter_num, 4] = loss_class[3]
 
     iter_num += 1
-    print 'epoch %d-%d, p/n: %d/%d, loss: %.8f' % (epoch_num, iter_num, len(selected_pos_samples), len(selected_neg_samples), np.sum(loss_rpn) + np.sum(loss_class))
+    if epoch % 50 == 0 :
+        print 'epoch %d-%d, p/n: %d/%d, loss: %.8f' % (epoch_num, iter_num, len(selected_pos_samples), len(selected_neg_samples), np.sum(loss_rpn) + np.sum(loss_class))
 
     if iter_num == epoch_length:
         loss_rpn_cls = np.mean(losses[:, 0])
