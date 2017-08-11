@@ -56,10 +56,7 @@ class Options:
 
 sys.setrecursionlimit(40000)
 
-options = Options(train_path, parser='a2d', 
-
-
-    =32, num_epochs=100)
+options = Options(train_path, parser='a2d', num_rois=32, num_epochs=100)
 
 if not options.train_path:   # if filename is not given
     print 'Error: path to training data must be specified. Pass --path to command line'
