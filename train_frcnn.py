@@ -249,7 +249,7 @@ while True:
     losses[iter_num, 4] = loss_class[3]
 
     iter_num += 1
-    if epoch % 50 == 0 :
+    if iter_num % 50 == 0 :
         print 'epoch %d-%d, p/n: %d/%d, loss: %.8f' % (epoch_num, iter_num, len(selected_pos_samples), len(selected_neg_samples), np.sum(loss_rpn) + np.sum(loss_class))
 
     if iter_num == epoch_length:
